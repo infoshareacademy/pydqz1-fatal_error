@@ -78,7 +78,7 @@ PyYAML==3.12
 pyzmq==18.1.0
 qtconsole==4.5.5
 reportlab==3.4.0
-requests==2.18.4
+requests==2.20.0
 requests-unixsocket==0.1.5
 screen-resolution-extra==0.0.0
 SecretStorage==2.3.1
