@@ -1,5 +1,5 @@
 import create_nick_email
-
+from name_plus_surname_generators import name_plus_surname_generator
 osoba = create_nick_email.create_person()
 imie = create_nick_email.name_random()
 nazwisko = create_nick_email.surname_random()
@@ -17,4 +17,7 @@ print("2")
 
 for data in dane:
     print(data)
-print("3")
+
+
+datax = name_plus_surname_generator.name_plus_surname_generator()
+print(datax)
