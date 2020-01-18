@@ -1,11 +1,11 @@
-from name_plus_surname_generators import name_generator, surname_generator
+from name_plus_surname_generators import surname_generator, save_result, name_generator
 
 
 def name_plus_surname_generator():
     name = name_generator.name_generator()
     surname = surname_generator.surname_generator()
-    name_plus_surname = name, surname
-    return name_plus_surname
+    result = name, surname
+    return result
 
 
-name_plus_surname_generator()
+

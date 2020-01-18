@@ -11,8 +11,9 @@ def read_surnames():
 
 def surname_generator():
     surnames = read_surnames()
-    surname = random.choice(surnames)
-    print(surname)
-    return surname
+    result = random.choice(surnames)
+    return result
+
+
 
 

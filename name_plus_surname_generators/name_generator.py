@@ -11,8 +11,7 @@ def read_names():
 
 def name_generator():
     names = read_names()
-    name = random.choice(names)
-    print(name)
-    return name
+    result = random.choice(names)
+    return result
 
 
