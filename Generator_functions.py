@@ -2,10 +2,6 @@ import random
 import generator_adresu
 from generator_adresu import ver2
 from name_plus_surname_generators import surname_generator, name_generator
-# listy danych do generatora
-# names = ['Jacek', 'Wacek', 'Bogdan', 'Alina', 'Halina', 'Malina']
-# surnames = ['Kocur', 'Strzyż', 'Zwyż', 'Boruta', 'Blacha', 'Krach']
-# persons_list = []
 
 
 # funkcje edycji napisu
@@ -43,12 +39,13 @@ def nickname_random():
     nickname = even_letters(name_random()["Imie"]) + even_letters(surname_random()["Nazwisko"])
     return {"Nick":nickname}
 
-
+# Funkcja zwracajaca email
 def email_random():
     email = nickname_random()["Nick"] + "@wp.pl"
     return {"Email":email}
-# ["Imie"]
-# ["Nazwisko"]
+
+
+# Tworzenie pełnego pakietu danych w postaci osoby
 def create_person():
     name = name_random()
     surname = surname_random()
@@ -63,17 +60,3 @@ def create_person():
         "Adres": "Miasto: {} Ulica: {} Numer: {}".format(address["Adres"],address["Street"],address["Number"])
     }
     return person
-
-
-def add_person_to_list():
-    global persons_list
-    created_person = create_person()
-    persons_list.append(created_person)
-    print("Created person:\n", created_person)
-
-
-# dane_jakies = ver2.print_address()
-# print(name_random())
-# print(surname_random())
-# print(dane_jakies)
-# {'Adres': 'Zielona', 'Street': 'Ciemna', 'Number': 604}
