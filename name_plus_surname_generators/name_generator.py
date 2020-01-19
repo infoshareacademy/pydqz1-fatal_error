@@ -12,6 +12,12 @@ def read_names():
 def name_generator():
     names = read_names()
     result = random.choice(names)
+    print(result)
     return result
+
+
+name_generator()
+
+
 
 
