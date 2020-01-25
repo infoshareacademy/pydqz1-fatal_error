@@ -78,7 +78,7 @@ def create_person(save_to_file=False):
         save_result(person)
     return person
 
-
+# Zapis danych do pliku w formacie .json
 def save_result(result):
     with open('result.json', 'w', encoding="utf-8") as result_file:
         json.dump([result], result_file, ensure_ascii=False)
