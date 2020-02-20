@@ -1,5 +1,6 @@
 from selenium.webdriver.common.keys import Keys
-
+from random import choice
+import time
 
 class SearchFeature:
 
@@ -25,7 +26,12 @@ class SearchFeature:
         self.Visa_Select_Country_First = '#s2id_autogen4 > a'
         self.Visa_Select_Country_Second = '#s2id_autogen6 > a'
         self.Visa_Search_Button = '#ivisa button'
-        self.Visa_assert_text = "#body-section h3"
+        self.Visa_assert_result_text = '#body-section h3'
+        self.Visa_assert_alert_text = 'alert'
+        self.Visa_first_country_check_text = '#s2id_autogen4 > a >span:nth-child(1)'
+        self.Visa_second_country_check_text = '#s2id_autogen6 > a >span:nth-child(1)'
+        self.Visa_no_results_found = '#select2-drop > ul > li'
+        self.Visa_country_list = '#select2-drop li > div'
         # następne css selektory
 
     # przerobić to na go_to, żeby przechodziło na odpowiedni bar
@@ -68,5 +74,45 @@ class SearchFeature:
         self.driver.find_element_by_css_selector(self.Visa_Search_Button).click()
 
     def visa_result_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.Visa_assert_text)
+        elements = self.driver.find_elements_by_css_selector(self.Visa_assert_result_text)
         return [elements[x].text for x in range(len(elements))]
+
+    # def visa_alert_text(self):
+    #     elements = self.driver.find_elements_by_css_selector(self.Visa_assert_alert_text)
+    #     return [elements[x].text for x in range(len(elements))]
+    #
+    # def visa_first_country_check_text(self):
+    #     elements = self.driver.find_elements_by_css_selector(self.Visa_first_country_check_text)
+    #     return [elements[x].text for x in range(len(elements))]
+    #
+    # def visa_second_country_check_text(self):
+    #     elements = self.driver.find_elements_by_css_selector(self.Visa_second_country_check_text)
+    #     return [elements[x].text for x in range(len(elements))]
+    #
+    # def visa_stupid_data_no_found(self):
+    #     elements = self.driver.find_elements_by_css_selector(self.Visa_no_results_found)
+    #     return [elements[x].text for x in range(len(elements))]
+
+    def visa_choose_random_first_country(self):
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_First).click()
+        elements = self.driver.find_elements_by_css_selector(self.Visa_country_list)
+        country_list = [elements[x].text for x in range(len(elements))]
+        country_list.remove('Select Country')
+        first_country = choice(country_list)
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_First).send_keys(first_country)
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_First).send_keys(Keys.ENTER)
+        time.sleep(1)
+        return first_country
+
+    def visa_choose_random_second_country(self):
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_Second).click()
+        elements = self.driver.find_elements_by_css_selector(self.Visa_country_list)
+        country_list = [elements[x].text for x in range(len(elements))]
+        country_list.remove('Select Country')
+        second_country = choice(country_list)
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_Second).send_keys(second_country)
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector(self.Visa_Select_Country_Second).send_keys(Keys.ENTER)
+        time.sleep(1)
+        return second_country
