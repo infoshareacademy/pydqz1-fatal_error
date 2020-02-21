@@ -6,11 +6,21 @@ class SearchFeature:
 
     def __init__(self, driver):
         self.driver = driver
-        self.tours_search_by = '#select2-drop input'
+        self.tours_search_by = '#s2id_autogen10 a'
         self.tours_date = '#tchkin input'
         self.tours_guests = '#adults'
-        self.tours_select_type = '#select2-drop > div > input'
+        self.tours_select_type = '#s2id_tourtype a'
         self.tours_search_button = '#tours button'
+
+        self.tours_assert_category_location = '#s2id_autogen2 span'
+        self.tours_assert_category_date = '#tchkin input'
+        self.tours_assert_category_guests = "#adults [selected]"
+        self.tours_assert_category_tours_type = '#tourtype [selected]'
+
+
+
+
+
         self.Main_Button_Hotels = '#body-section li:nth-child(1) > a'
         self.Main_Button_Flights = '#body-section li:nth-child(2) > a'
         self.Main_Button_Tours = '#body-section li:nth-child(3) > a'
@@ -32,30 +42,66 @@ class SearchFeature:
         self.Visa_second_country_check_text = '#s2id_autogen6 > a >span:nth-child(1)'
         self.Visa_no_results_found = '#select2-drop > ul > li'
         self.Visa_country_list = '#select2-drop li > div'
+        self.Nav_bar = '#body-section .nav li span'   # powinien byc taki ''   #body-section li:nth-child(5) span
         # następne css selektory
 
     # przerobić to na go_to, żeby przechodziło na odpowiedni bar
 
+    def get_nav_bar_content(self):
+        elements = self.driver.find_elements_by_css_selector(self.Nav_bar)
+        return [elements[x].text for x in range(len(elements))]
+
     def click_on_tours(self):
         self.driver.find_element_by_css_selector(self.Main_Button_Tours).click()
 
-    # def tours_search_city(self):
-    #     self.driver.find_element_by_css_selector(self.tours_search_by).clear()
-    #     self.driver.find_element_by_css_selector(self.tours_search_by).send_keys('Egypt')
-    #     self.driver.find_element_by_css_selector(self.tours_search_by).send_keys(Keys.ENTER)
-    #
-    # def tours_change_date(self):
-    #     self.driver.find_element_by_css_selector(self.tours_date).clear()
-    #     self.driver.find_element_by_css_selector(self.tours_date).send_keys('20/02/2020')
-    #     self.driver.find_element_by_css_selector(self.tours_date).send_keys(Keys.ENTER)
-    #
-    # def tours_guests_number(self):
-    #     self.driver.find_element_by_css_selector(self.tours_guests).click()
-    #     self.driver.find_element_by_css_selector('# adults > option:nth-child(5)').click()
-    #
-    #
-    # def tours_trip_type(self):
-    #     self.driver.find_element_by_css_selector(self.tours_select_type).click()
+    def tours_search_city(self, town='Egypt'):
+        self.driver.find_element_by_css_selector(self.tours_search_by).click()
+        self.driver.find_element_by_css_selector(self.tours_search_by).send_keys(town)
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector(self.tours_search_by).send_keys(Keys.ENTER)
+
+    def tours_change_date(self, date='27/02/2020'):
+        self.driver.find_element_by_css_selector(self.tours_date).click()
+        self.driver.find_element_by_css_selector(self.tours_date).clear()
+        self.driver.find_element_by_css_selector(self.tours_date).send_keys(date)
+
+    def tours_guests_number(self, guests):
+        self.driver.find_element_by_css_selector(self.tours_guests).click()
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector("#adults [value='" + guests + "']").click()
+
+    def tours_trip_type(self, trip):
+        self.driver.find_element_by_css_selector(self.tours_select_type).click()
+        self.driver.find_element_by_css_selector(self.tours_select_type).send_keys(trip)
+        self.driver.find_element_by_css_selector(self.tours_select_type).send_keys(Keys.ENTER)
+
+    def tours_search_button_click(self):
+        self.driver.find_element_by_css_selector(self.tours_search_button).click()
+
+    def tours_assert_cat_location(self):
+        elements = self.driver.find_elements_by_css_selector(self.tours_assert_category_location)
+        return [elements[x].text for x in range(len(elements))]
+
+    def tours_assert_cat_date(self):
+        element = self.driver.find_element_by_css_selector(self.tours_assert_category_date).get_attribute("value")
+        return element
+
+    def tours_assert_cat_guests(self):
+        element = self.driver.find_element_by_css_selector(self.tours_assert_category_guests).get_attribute("value")
+        return element
+
+    def tours_assert_cat_type(self):
+        elements = self.driver.find_elements_by_css_selector(self.tours_assert_category_tours_type)
+        return [elements[x].text for x in range(len(elements))]
+
+
+
+
+
+
+
+
+
 
     def click_on_visa(self):
         self.driver.find_element_by_css_selector(self.Main_Button_Visa).click()
@@ -76,22 +122,6 @@ class SearchFeature:
     def visa_result_text(self):
         elements = self.driver.find_elements_by_css_selector(self.Visa_assert_result_text)
         return [elements[x].text for x in range(len(elements))]
-
-    # def visa_alert_text(self):
-    #     elements = self.driver.find_elements_by_css_selector(self.Visa_assert_alert_text)
-    #     return [elements[x].text for x in range(len(elements))]
-    #
-    # def visa_first_country_check_text(self):
-    #     elements = self.driver.find_elements_by_css_selector(self.Visa_first_country_check_text)
-    #     return [elements[x].text for x in range(len(elements))]
-    #
-    # def visa_second_country_check_text(self):
-    #     elements = self.driver.find_elements_by_css_selector(self.Visa_second_country_check_text)
-    #     return [elements[x].text for x in range(len(elements))]
-    #
-    # def visa_stupid_data_no_found(self):
-    #     elements = self.driver.find_elements_by_css_selector(self.Visa_no_results_found)
-    #     return [elements[x].text for x in range(len(elements))]
 
     def visa_choose_random_first_country(self):
         self.driver.find_element_by_css_selector(self.Visa_Select_Country_First).click()
