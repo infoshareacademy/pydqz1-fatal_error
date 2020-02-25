@@ -1,90 +1,94 @@
 import time
 
+from php_travels.pages.base_actions import BaseActions
+
 
 class Login:
 
-    def __init__(self, driver):
+    def __init__(self, driver, email='sr@wp.pl', password='123456789', used_mail='s.r@wp.pl', wrong_mail='srwp.pl'):
         self.driver = driver
+        self.email_data = email
+        self.password_data = password
+        self.used_mail_data = used_mail
+        self.wrong_mail_data = wrong_mail
         self.my_account_button = "ul .nav #li_myaccount"
         self.login_button = ".open >ul>:nth-child(1) > a"
+        self.checkbox_remember_me = "#remember-me"
+        self.login_submit_button = ".loginbtn[type='submit']"
         self.email_input = "[name='username']"
         self.password_input = "[name='password']"
-        self.checkbox_remember = "#remember-me"
-        self.login_submit = ".loginbtn[type='submit']"
-        self.reset_password = "div.col-md-12:nth-child(3)"
+        self.forget_password_button = "div.col-md-12:nth-child(3)"
         self.reset_password_input = "[placeholder='your@email.com']"
         self.reset_password_button = "button.resetbtn"
-        self.assert_login_submit_empty = ".resultlogin .alert-danger"
-        self.assert_left_menu = ".nav.profile-tabs [data-toggle='tab']"
-        self.assert_result_reset = ".alert-success"
+        self.assert_after_bad_login = ".resultlogin .alert-danger"
+        self.assert_after_sucess_login = ".nav.profile-tabs [data-toggle='tab']"
+        self.assert_for_password_reset_result = ".alert-success"
         self.logout_button = ".open > ul:nth-child(2) > li:nth-child(2) > a:nth-child(1)"
-        self.assert_logout = ".panel-heading"
-        self.login_button_logout = "ul.navbar-side:nth-child(1) > li:nth-child(1) > a:nth-child(1)"
-
+        self.assert_for_logout_result = ".panel-heading"
+        self.user_button_after_login = "ul.navbar-side:nth-child(1) > li:nth-child(1) > a:nth-child(1)"
 
     def login_happy_path(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/')
-        self.driver.find_element_by_css_selector(self.my_account_button).click()
-        self.driver.find_element_by_css_selector(self.login_button).click()
-        self.driver.find_element_by_css_selector(self.email_input).send_keys('sr@wp.pl')
-        self.driver.find_element_by_css_selector(self.password_input).send_keys('123456789')
-        self.driver.find_element_by_css_selector(self.checkbox_remember).click()
-        self.driver.find_element_by_css_selector(self.login_submit).click()
+        BaseActions.www_open(self)
+        BaseActions.my_account_btn(self)
+        BaseActions.login_btn(self)
+        BaseActions.email_input(self)
+        BaseActions.password_input(self)
+        BaseActions.checkbox_remember_set(self)
+        BaseActions.login_submit_btn(self)
 
     def login_forget_password(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/login')
-        self.driver.find_element_by_css_selector(self.reset_password).click()
-        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys('s.r@wp.pl')
-        self.driver.find_element_by_css_selector(self.reset_password_button).click()
+        BaseActions.www_open_login(self)
+        time.sleep(1)
+        BaseActions.forget_password_btn(self)
+        BaseActions.reset_password_input(self)
+        BaseActions.reset_password_btn(self)
 
     def login_empty_email(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/login')
-        self.driver.find_element_by_css_selector(self.password_input).send_keys('123456789')
-        self.driver.find_element_by_css_selector(self.login_submit).click()
+        BaseActions.www_open_login(self)
+        BaseActions.password_input(self)
+        BaseActions.login_submit_btn(self)
 
     def login_empty_password(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/login')
-        self.driver.find_element_by_css_selector(self.email_input).send_keys('sr@wp.pl')
-        self.driver.find_element_by_css_selector(self.login_submit).click()
+        BaseActions.www_open_login(self)
+        BaseActions.email_input(self)
+        BaseActions.login_submit_btn(self)
 
     def logout(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/login')
-        self.driver.find_element_by_css_selector(self.email_input).send_keys('sr@wp.pl')
-        self.driver.find_element_by_css_selector(self.password_input).send_keys('123456789')
-        self.driver.find_element_by_css_selector(self.login_submit).click()
+        BaseActions.www_open_login(self)
+        BaseActions.email_input(self)
+        BaseActions.password_input(self)
+        BaseActions.login_submit_btn(self)
         time.sleep(1)
-        self.driver.find_element_by_css_selector(self.login_button_logout).click()
-        self.driver.find_element_by_css_selector(self.logout_button).click()
+        BaseActions.user_btn(self)
+        BaseActions.logout_btn(self)
         time.sleep(1)
 
     def login_wrong_email(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/login')
-        self.driver.find_element_by_css_selector(self.email_input).send_keys('srwp.pl')
-        self.driver.find_element_by_css_selector(self.password_input).send_keys('123456789')
-        self.driver.find_element_by_css_selector(self.login_submit).click()
+        BaseActions.www_open_login(self)
+        BaseActions.wrong_email_input(self)
+        BaseActions.password_input(self)
+        BaseActions.login_submit_btn(self)
 
     def left_menu_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_left_menu)
+        elements = self.driver.find_elements_by_css_selector(self.assert_after_sucess_login)
         return [elements[x].text for x in range(len(elements))]
 
     def reset_password_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_result_reset)
+        elements = self.driver.find_elements_by_css_selector(self.assert_for_password_reset_result)
         return [elements[x].text for x in range(len(elements))]
 
     def empty_email_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_login_submit_empty)
+        elements = self.driver.find_elements_by_css_selector(self.assert_after_bad_login)
         return [elements[x].text for x in range(len(elements))]
 
     def empty_password_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_login_submit_empty)
+        elements = self.driver.find_elements_by_css_selector(self.assert_after_bad_login)
         return [elements[x].text for x in range(len(elements))]
 
     def logout_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_logout)
+        elements = self.driver.find_elements_by_css_selector(self.assert_for_logout_result)
         return [elements[x].text for x in range(len(elements))]
 
     def wrong_email_text(self):
-        elements = self.driver.find_elements_by_css_selector(self.assert_login_submit_empty)
+        elements = self.driver.find_elements_by_css_selector(self.assert_after_bad_login)
         return [elements[x].text for x in range(len(elements))]
-
-
