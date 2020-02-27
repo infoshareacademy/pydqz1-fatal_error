@@ -33,6 +33,9 @@ class BaseActions:
     def reset_password_input(self):
         self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(self.used_mail_data)
 
+    def reset_password_input_wrong(self):
+        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(self.wrong_mail_data)
+
     def reset_password_btn(self):
         self.driver.find_element_by_css_selector(self.reset_password_button).click()
 

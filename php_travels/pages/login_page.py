@@ -23,6 +23,7 @@ class Login:
         self.assert_after_bad_login = ".resultlogin .alert-danger"
         self.assert_after_sucess_login = ".nav.profile-tabs [data-toggle='tab']"
         self.assert_for_password_reset_result = ".alert-success"
+        self.assert_for_password_reset_result_with_wrong_mail = ".alert"
         self.logout_button = ".open > ul:nth-child(2) > li:nth-child(2) > a:nth-child(1)"
         self.assert_for_logout_result = ".panel-heading"
         self.user_button_after_login = "ul.navbar-side:nth-child(1) > li:nth-child(1) > a:nth-child(1)"
@@ -41,6 +42,13 @@ class Login:
         time.sleep(1)
         BaseActions.forget_password_btn(self)
         BaseActions.reset_password_input(self)
+        BaseActions.reset_password_btn(self)
+
+    def login_reset_password_wrong_mail(self):
+        BaseActions.www_open_login(self)
+        time.sleep(1)
+        BaseActions.forget_password_btn(self)
+        BaseActions.reset_password_input_wrong(self)
         BaseActions.reset_password_btn(self)
 
     def login_empty_email(self):
@@ -75,6 +83,10 @@ class Login:
 
     def reset_password_text(self):
         elements = self.driver.find_elements_by_css_selector(self.assert_for_password_reset_result)
+        return [elements[x].text for x in range(len(elements))]
+
+    def reset_password_wrong_mail_text(self):
+        elements = self.driver.find_elements_by_css_selector(self.assert_for_password_reset_result_with_wrong_mail)
         return [elements[x].text for x in range(len(elements))]
 
     def empty_email_text(self):
