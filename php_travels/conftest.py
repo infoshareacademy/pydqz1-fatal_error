@@ -10,7 +10,7 @@ def setup(request):
 # te akcje zostaną wykonane przed testem:
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get('http://www.kurs-selenium.pl/demo/')
-    driver.implicitly_wait(10)
+
     driver.maximize_window()
     request.cls.driver = driver
     """It's easy - request.cls is the test class using the fixture, so request.cls.driver = ...
