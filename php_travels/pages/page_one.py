@@ -17,9 +17,9 @@ class SearchFeature:
         self.tours_assert_category_date = '#tchkin input'
         self.tours_assert_category_guests = "#adults [selected]"
         self.tours_assert_category_tours_type = '#tourtype [selected]'
-        self.tours_assert_result_prices_list = ".fs26 b"
-        self.tours_assert_result_tours_names_list = ".row .RTL b"
-        self.tours_assert_result_tours_locations_list = ".row .ellipsisFIX"
+        self.assert_result_prices_list = ".fs26 b"
+        self.assert_result_names_list = ".row .RTL b"
+        self.assert_result_tours_locations_list = ".row .ellipsisFIX"
         self.tours_assert_calendar_view = '[class*="dropdown-menu"][style*="display: block;"]'
 
 
@@ -29,18 +29,20 @@ class SearchFeature:
         self.Main_Button_Tours = '#body-section li:nth-child(3) > a'
         self.Main_Button_Cars = '#body-section li:nth-child(4) > a'
         self.Main_Button_Visa = '#body-section li:nth-child(5) > a'
-        self.Cars_Location_Pick = '#s2id_carlocations .select2-chosen'
-        self.Cars_Location_Drop = '#s2id_carlocations2 .select2-chosen'
+
+        self.Cars_Location_Pick = '#s2id_carlocations a'
+        self.Cars_Location_Drop = '#s2id_carlocations2 a'
         self.Cars_Date_Pick = '#departcar.form.input-lg.RTL'
         self.Cars_Time_Pick = '#cars :nth-child(4) select'
         self.Cars_Date_Drop = '#returncar.form.input-lg.RTL'
         self.Cars_Time_Drop = '#cars :nth-child(6) select'
         self.Cars_Search_Button = '#cars button'
+
         self.Visa_Select_Country_First = '#s2id_autogen4 > a'
         self.Visa_Select_Country_Second = '#s2id_autogen6 > a'
         self.Visa_Search_Button = '#ivisa button'
         self.Visa_assert_result_text = '#body-section h3'
-        self.Visa_assert_search_bar_categories = '#body-section li'
+        self.assert_search_bar_categories = '#body-section li'
         self.Visa_first_country_check_text = '#s2id_autogen4 > a >span:nth-child(1)'
         self.Visa_second_country_check_text = '#s2id_autogen6 > a >span:nth-child(1)'
         self.Visa_no_results_found = '#select2-drop > ul > li'
@@ -52,13 +54,13 @@ class SearchFeature:
     def click_on_tours(self):
         self.driver.find_element_by_css_selector(self.Main_Button_Tours).click()
 
-    def tours_search_city(self, town='Egypt'):
+    def tours_search_city(self, town):
         self.driver.find_element_by_css_selector(self.tours_search_by).click()
         self.driver.find_element_by_css_selector(self.tours_search_by).send_keys(town)
         time.sleep(0.5)
         self.driver.find_element_by_css_selector(self.tours_search_by).send_keys(Keys.ENTER)
 
-    def tours_change_date(self, date='27/02/2020'):
+    def tours_change_date(self, date):
         self.driver.find_element_by_css_selector(self.tours_date).click()
         self.driver.find_element_by_css_selector(self.tours_date).clear()
         self.driver.find_element_by_css_selector(self.tours_date).send_keys(date)
@@ -92,19 +94,49 @@ class SearchFeature:
         elements = self.driver.find_elements_by_css_selector(self.tours_assert_category_tours_type)
         return [elements[x].text for x in range(len(elements))]
 
-    def tours_assert_prices_list(self):
-        elements = self.driver.find_elements_by_css_selector(self.tours_assert_result_prices_list)
+    def assert_prices_list(self):
+        elements = self.driver.find_elements_by_css_selector(self.assert_result_prices_list)
         return [elements[x].text for x in range(len(elements))]
 
-    def tours_assert_names_list(self):
-        elements = self.driver.find_elements_by_css_selector(self.tours_assert_result_tours_names_list)
+    def assert_names_list(self):
+        elements = self.driver.find_elements_by_css_selector(self.assert_result_names_list)
         return [elements[x].text for x in range(len(elements))]
 
-    def tours_assert_locations_list(self):
-        elements = self.driver.find_elements_by_css_selector(self.tours_assert_result_tours_locations_list)
+    def assert_locations_list(self):
+        elements = self.driver.find_elements_by_css_selector(self.assert_result_tours_locations_list)
         return [elements[x].get_attribute('title') for x in range(len(elements))]
 
 
+
+    def click_on_cars(self):
+        self.driver.find_element_by_css_selector(self.Main_Button_Cars).click()
+
+    def cars_choose_pick_up_location(self, pick_up_town):
+        self.driver.find_element_by_css_selector(self.Cars_Location_Pick).click()
+        self.driver.find_element_by_css_selector(self.Cars_Location_Pick).send_keys(pick_up_town)
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector(self.Cars_Location_Pick).send_keys(Keys.ENTER)
+
+    def cars_choose_drop_off_location(self, drop_off_town):
+        self.driver.find_element_by_css_selector(self.Cars_Location_Drop).click()
+        self.driver.find_element_by_css_selector(self.Cars_Location_Drop).send_keys(drop_off_town)
+        time.sleep(0.5)
+        self.driver.find_element_by_css_selector(self.Cars_Location_Drop).send_keys(Keys.ENTER)
+
+
+    def cars_change_date_pick_up_location(self, date):
+        self.driver.find_element_by_css_selector(self.Cars_Date_Pick).click()
+        self.driver.find_element_by_css_selector(self.Cars_Date_Pick).clear()
+        self.driver.find_element_by_css_selector(self.Cars_Date_Pick).send_keys(date)
+
+
+    def cars_change_date_drop_off_location(self, date):
+        self.driver.find_element_by_css_selector(self.Cars_Date_Drop).click()
+        self.driver.find_element_by_css_selector(self.Cars_Date_Drop).clear()
+        self.driver.find_element_by_css_selector(self.Cars_Date_Drop).send_keys(date)
+
+    def cars_search_button_click(self):
+        self.driver.find_element_by_css_selector(self.Cars_Search_Button).click()
 
 
 
@@ -154,5 +186,5 @@ class SearchFeature:
         return [elements[x].text for x in range(len(elements))]
 
     def get_search_bar_text_categories(self):
-        elements = self.driver.find_elements_by_css_selector(self.Visa_assert_search_bar_categories)
+        elements = self.driver.find_elements_by_css_selector(self.assert_search_bar_categories)
         return [elements[x].get_attribute('data-title') for x in range(len(elements))]

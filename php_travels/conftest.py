@@ -13,9 +13,6 @@ def setup(request):
     driver.maximize_window()
     request.cls.driver = driver
     request.cls.search_feature = SearchFeature(driver)
-    """It's easy - request.cls is the test class using the fixture, so request.cls.driver = ...
-    is essentially the same as MyTestClass.driver = ... if MyTestClass uses the fixture.
-    https://pytest.readthedocs.io/en/2.8.7/builtin.html"""
     # te akcje zostaną po wykonaniu akcji z plików z testami:
     yield
     driver.quit()
