@@ -8,8 +8,6 @@ from allure_commons.types import AttachmentType
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-
-
 @pytest.fixture()
 def setup_ch(request):
     # te akcje zostsaną wykonane przed testem:
@@ -37,11 +35,11 @@ def setup_ch(request):
 def setup_ff(request):
     driver = webdriver.Firefox()
     driver.get('http://www.kurs-selenium.pl/demo/')
-    driver.implicitly_wait(20)
+    driver.implicitly_wait(10)
     driver.maximize_window()
+    wait = WebDriverWait(driver, 15, 1)
     request.cls.driver = driver
     request.cls.login_page = Login(driver)
-
 
     yield
     driver.quit()

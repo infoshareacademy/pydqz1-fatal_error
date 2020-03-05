@@ -18,23 +18,23 @@ class BaseActions:
     def login_submit_btn(self):
         self.driver.find_element_by_css_selector(self.login_submit_button).click()
 
-    def email_input(self):
-        self.driver.find_element_by_css_selector(self.email_input).send_keys(self.email_data)
+    def email_input(self, email_data):
+        self.driver.find_element_by_css_selector(self.email_input).send_keys(email_data)
 
-    def wrong_email_input(self):
-        self.driver.find_element_by_css_selector(self.email_input).send_keys(self.wrong_mail_data)
+    def wrong_email_input(self, wrong_mail_data):
+        self.driver.find_element_by_css_selector(self.email_input).send_keys(wrong_mail_data)
 
-    def password_input(self):
-        self.driver.find_element_by_css_selector(self.password_input).send_keys(self.password_data)
+    def password_input(self, password_data):
+        self.driver.find_element_by_css_selector(self.password_input).send_keys(password_data)
 
     def forget_password_btn(self):
         self.driver.find_element_by_css_selector(self.forget_password_button).click()
 
-    def reset_password_input(self):
-        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(self.used_mail_data)
+    def reset_password_input(self, used_mail_data):
+        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(used_mail_data)
 
-    def reset_password_input_wrong(self):
-        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(self.wrong_mail_data)
+    def reset_password_input_wrong(self, wrong_mail_data):
+        self.driver.find_element_by_css_selector(self.reset_password_input).send_keys(wrong_mail_data)
 
     def reset_password_btn(self):
         self.driver.find_element_by_css_selector(self.reset_password_button).click()
