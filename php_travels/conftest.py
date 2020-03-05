@@ -5,6 +5,8 @@ from php_travels.pages.login_page import Login
 import allure
 import time
 from allure_commons.types import AttachmentType
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 
 
@@ -15,6 +17,7 @@ def setup_ch(request):
     driver.get('http://www.kurs-selenium.pl/demo/')
     driver.implicitly_wait(10)
     driver.maximize_window()
+    wait = WebDriverWait(driver, 15, 1)
     request.cls.driver = driver
     request.cls.login_page = Login(driver)
     """It's easy - request.cls is the test class using the fixture, so request.cls.driver = ...
@@ -30,13 +33,15 @@ def setup_ch(request):
     driver.quit()
 
 
-# @pytest.fixture()
-# def setup_ff(request):
-#     driver = webdriver.Firefox()
-#     driver.get('http://www.kurs-selenium.pl/demo/')
-#     driver.implicitly_wait(10)
-#     driver.maximize_window()
-#     request.cls.driver = driver
-#
-#     yield
-#     driver.quit()
+@pytest.fixture()
+def setup_ff(request):
+    driver = webdriver.Firefox()
+    driver.get('http://www.kurs-selenium.pl/demo/')
+    driver.implicitly_wait(20)
+    driver.maximize_window()
+    request.cls.driver = driver
+    request.cls.login_page = Login(driver)
+
+
+    yield
+    driver.quit()
