@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from pages.page_one import SearchFeature
-
+from pages.base_actions import BaseActions
 
 @pytest.fixture()
 def setup(request):
