@@ -28,3 +28,4 @@ class BaseActions:
     def base_get_search_bar_text_categories(self):
         elements = self.driver.find_elements_by_css_selector('#body-section li')
         return [elements[x].get_attribute('data-title') for x in range(len(elements))]
+

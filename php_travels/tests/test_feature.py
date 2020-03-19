@@ -10,20 +10,9 @@ import time
 @pytest.mark.usefixtures('setup')
 class TestTours:
 
-# [x] assercja kategorii - czy nasze wybrane się nie zmieniły i zachowały
-# [tak jakby x] assercja od kwoty zależnej od osób (150$ za osoby czyli przy 2 osobach to 300$)
-# [x] assercja od tego czy nazwa danej wycieczki jest taka jak trzeba ('Spectaculars Of The…')
-# [x] assercja od tego czy nazwa danej wycieczki jest taka jak trzeba ('Alexandria')
-# [] assercja tego czy jest widoczny/klikalny przycisk "Details"
-# [] napisać kod do tours dla randomowych wartości
-    def test_all_fields_filled(self, setup):
-        self.search_feature.click_on_tours()
-        self.search_feature.tours_search_city('Egypt')
-        self.search_feature.tours_change_date('27/02/2020')
-        self.search_feature.tours_guests_number('2')
-        self.search_feature.tours_trip_type('Private')
-        self.search_feature.tours_search_button_click()
-        time.sleep(3)
+    def test_all_fields(self, setup):
+        self.search_feature.search_tours(town='Egypt', date='27/02/2020', guests='2', trip='Private')
+        time.sleep(0.5)
         #TESTY SPRAWDZAJĄCE CZY KATEGORIE SIĘ NIE ZMIENIŁY
         assert 'Nile Egypt, Egypt' in self.search_feature.tours_assert_cat_location()
         assert '27/02/2020' in self.search_feature.tours_assert_cat_date()
@@ -35,13 +24,9 @@ class TestTours:
         assert 'Spectaculars Of The…' in self.search_feature.assert_names_list()
         assert 'Alexandria' in self.search_feature.assert_locations_list()
 
+    # test gdy puste jest pole typu miasta
     def test_empty_city_field(self, setup):
-        self.search_feature.click_on_tours()
-        self.search_feature.tours_change_date('27/02/2020')
-        self.search_feature.tours_guests_number('2')
-        self.search_feature.tours_trip_type('Private')
-        self.search_feature.tours_search_button_click()
-        time.sleep(3)
+        self.search_feature.search_tours(date='27/02/2020', guests='2', trip='Private')
         assert 2 == len(self.search_feature.assert_prices_list())
         assert '300' in self.search_feature.assert_prices_list()[0]
         assert 'Spectaculars Of The…' in self.search_feature.assert_names_list()
@@ -49,23 +34,14 @@ class TestTours:
 
     # test gdy puste jest pole daty
     def test_empty_date_field(self, setup):
-        self.search_feature.click_on_tours()
-        self.search_feature.tours_search_city('Egypt')
-        self.search_feature.tours_change_date('')
-        self.search_feature.tours_guests_number('2')
-        self.search_feature.tours_trip_type('Private')
-        self.search_feature.tours_search_button_click()
+        self.search_feature.search_tours(town='Egypt', guests='2', trip='Private')
         time.sleep(2)
         list_of_assert_elements = self.search_feature.get_search_bar_text_categories()
         assert set(list_of_assert_elements) <= {'hotels', 'flights', 'tours', 'ivisa', 'cars'}
 
     # test gdy puste jest pole typu wycieczki
     def test_empty_tour_type_field(self, setup):
-        self.search_feature.click_on_tours()
-        self.search_feature.tours_search_city('Egypt')
-        self.search_feature.tours_change_date('27/02/2020')
-        self.search_feature.tours_guests_number('2')
-        self.search_feature.tours_search_button_click()
+        self.search_feature.search_tours(town='Egypt', date='27/02/2020', guests='2')
         time.sleep(3)
         assert 1 == len(self.search_feature.assert_prices_list())
         assert '300' in self.search_feature.assert_prices_list()[0]
@@ -76,12 +52,7 @@ class TestTours:
     # test sprawdzający czy kategorię się zapamiętują
     @pytest.mark.skip('Bugged Guests field')
     def test_save_categories(self):
-        self.search_feature.click_on_tours()
-        self.search_feature.tours_search_city('Egypt')
-        self.search_feature.tours_change_date('27/02/2020')
-        self.search_feature.tours_guests_number('4')
-        self.search_feature.tours_trip_type('Private')
-        self.search_feature.tours_search_button_click()
+        self.search_feature.search_tours(town='Egypt', date='27/02/2020', guests='4', trip='Private')
         time.sleep(3)
         assert 'Nile Egypt, Egypt' in self.search_feature.tours_assert_cat_location()
         assert '27/02/2020' in self.search_feature.tours_assert_cat_date()
@@ -156,12 +127,7 @@ class TestVisa:
 class TestCars:
     # testuje cars z wypelnionymi polami
     def test_all_fields_filled(self, setup):
-        self.search_feature.click_on_cars()
-        self.search_feature.cars_choose_pick_up_location('Manchester')
-        self.search_feature.cars_choose_drop_off_location('Manchester')
-        self.search_feature.cars_change_date_pick_up_location('27/03/2020')
-        self.search_feature.cars_change_date_drop_off_location('28/03/2020')
-        self.search_feature.cars_search_button_click()
+        self.search_feature.search_cars(pick_up_town="Manchester", drop_off_town="Manchester", pick_up_date="27/03/2020", drop_off_date="28/03/2020")
         time.sleep(2)
         assert 1 == len(self.search_feature.assert_prices_list())
         assert '80' in self.search_feature.assert_prices_list()[0]
@@ -169,45 +135,26 @@ class TestCars:
         assert 'Manchester' in self.search_feature.assert_locations_list()
 
     def test_empty_pick_up_location(self, setup):
-        self.search_feature.click_on_cars()
-        self.search_feature.cars_choose_drop_off_location('Manchester')
-        self.search_feature.cars_change_date_pick_up_location('27/03/2020')
-        self.search_feature.cars_change_date_drop_off_location('28/03/2020')
-        self.search_feature.cars_search_button_click()
+        self.search_feature.search_cars(drop_off_town="Manchester", pick_up_date="27/03/2020", drop_off_date="28/03/2020")
         time.sleep(2)
         list_of_assert_elements = self.search_feature.get_search_bar_text_categories()
         assert set(list_of_assert_elements) <= {'hotels', 'flights', 'tours', 'ivisa', 'cars'}
 
     @pytest.mark.skip('Clearing drop off location is impossible')
     def test_empty_drop_off_location(self, setup):
-        self.search_feature.click_on_cars()
-        self.search_feature.cars_choose_pick_up_location('Manchester')
-        self.search_feature.cars_choose_drop_off_location('')
-        self.search_feature.cars_change_date_pick_up_location('27/03/2020')
-        self.search_feature.cars_change_date_drop_off_location('28/03/2020')
-        self.search_feature.cars_search_button_click()
+        self.search_feature.search_cars(pick_up_town="Manchester", pick_up_date="27/03/2020", drop_off_date="28/03/2020")
         time.sleep(2)
         list_of_assert_elements = self.search_feature.get_search_bar_text_categories()
         assert set(list_of_assert_elements) <= {'hotels', 'flights', 'tours', 'ivisa', 'cars'}
 
     def test_empty_pick_up_date(self, setup):
-        self.search_feature.click_on_cars()
-        self.search_feature.cars_choose_pick_up_location('Manchester')
-        self.search_feature.cars_choose_drop_off_location('Manchester')
-        self.search_feature.cars_change_date_pick_up_location('')
-        self.search_feature.cars_change_date_drop_off_location('28/03/2020')
-        self.search_feature.cars_search_button_click()
+        self.search_feature.search_cars(pick_up_town="Manchester", drop_off_town="Manchester", drop_off_date="28/03/2020")
         time.sleep(2)
         list_of_assert_elements = self.search_feature.get_search_bar_text_categories()
         assert set(list_of_assert_elements) <= {'hotels', 'flights', 'tours', 'ivisa', 'cars'}
 
     def test_empty_drop_off_date(self, setup):
-        self.search_feature.click_on_cars()
-        self.search_feature.cars_choose_pick_up_location('Manchester')
-        self.search_feature.cars_choose_drop_off_location('Manchester')
-        self.search_feature.cars_change_date_pick_up_location('27/03/2020')
-        self.search_feature.cars_change_date_drop_off_location('')
-        self.search_feature.cars_search_button_click()
+        self.search_feature.search_cars(pick_up_town="Manchester", drop_off_town="Manchester", pick_up_date="27/03/2020")
         time.sleep(2)
         list_of_assert_elements = self.search_feature.get_search_bar_text_categories()
         assert set(list_of_assert_elements) <= {'hotels', 'flights', 'tours', 'ivisa', 'cars'}
