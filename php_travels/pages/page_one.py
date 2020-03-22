@@ -48,33 +48,6 @@ class SearchFeature:
         self.Visa_no_results_found = '#select2-drop > ul > li'
         self.Visa_country_list = '#select2-drop li > div'
 
-    # def click_on_tours(self):
-    #     self.base_actions.click_on(self.Main_Button_Tours)
-    #
-    # def tours_search_city(self, town):
-    #     self.base_actions.click_on(self.tours_search_by)
-    #     self.base_actions.field_send_keys(self.tours_search_by, town)
-    #     time.sleep(0.5)
-    #     self.base_actions.field_send_keys_enter(self.tours_search_by)
-    #
-    # def tours_change_date(self, date):
-    #     self.base_actions.click_on(self.tours_date)
-    #     self.base_actions.field_clear(self.tours_date)
-    #     self.base_actions.field_send_keys(self.tours_date, date)
-    #
-    # def tours_guests_number(self, guests):
-    #     self.base_actions.click_on(self.tours_guests)
-    #     time.sleep(0.5)
-    #     self.base_actions.click_on("#adults [value='" + guests + "']")
-    #
-    # def tours_trip_type(self, trip):
-    #     self.base_actions.click_on(self.tours_select_type)
-    #     self.base_actions.field_send_keys(self.tours_select_type, trip)
-    #     self.base_actions.field_send_keys_enter(self.tours_select_type)
-
-    # def tours_search_button_click(self):
-    #     self.base_actions.click_on(self.tours_search_button)
-
     def tours_assert_cat_location(self):
         return self.base_actions.assert_text_elements(self.tours_assert_category_location)
 
@@ -95,34 +68,6 @@ class SearchFeature:
 
     def assert_locations_list(self):
         return self.base_actions.assert_attribute_element(self.assert_result_tours_locations_list, 'title')
-
-    # def click_on_cars(self):
-    #     self.base_actions.click_on(self.Main_Button_Cars)
-
-    # def cars_choose_pick_up_location(self, pick_up_town):
-    #     self.base_actions.click_on(self.Cars_Location_Pick)
-    #     self.base_actions.field_send_keys(self.Cars_Location_Pick, pick_up_town)
-    #     time.sleep(0.5)
-    #     self.base_actions.field_send_keys_enter(self.Cars_Location_Pick)
-
-    def cars_choose_drop_off_location(self, drop_off_town):
-        self.base_actions.click_on(self.Cars_Location_Drop)
-        self.base_actions.field_send_keys(self.Cars_Location_Drop, drop_off_town)
-        time.sleep(0.5)
-        self.base_actions.field_send_keys_enter(self.Cars_Location_Drop)
-
-    def cars_change_date_pick_up_location(self, date):
-        self.base_actions.click_on(self.Cars_Date_Pick)
-        self.base_actions.field_clear(self.Cars_Date_Pick)
-        self.base_actions.field_send_keys(self.Cars_Date_Pick, date)
-
-    # def cars_change_date_drop_off_location(self, date):
-    #     self.base_actions.click_on(self.Cars_Date_Drop)
-    #     self.base_actions.field_clear(self.Cars_Date_Drop)
-    #     self.base_actions.field_send_keys(self.Cars_Date_Drop, date)
-
-    # def cars_search_button_click(self):
-    #     self.base_actions.click_on(self.Cars_Search_Button)
 
     def click_on_visa(self):
         self.base_actions.click_on(self.Main_Button_Visa)
@@ -196,20 +141,29 @@ class SearchFeature:
             self.base_actions.field_send_keys(self.Cars_Location_Pick, pick_up_town)
             time.sleep(0.5)
             self.base_actions.field_send_keys_enter(self.Cars_Location_Pick)
-        if drop_off_town !="":
+        if drop_off_town != "":
             self.base_actions.click_on(self.Cars_Location_Drop)
             self.base_actions.field_send_keys(self.Cars_Location_Drop, drop_off_town)
             time.sleep(0.5)
             self.base_actions.field_send_keys_enter(self.Cars_Location_Drop)
-        if pick_up_date !="":
+        if pick_up_date != "":
             self.base_actions.click_on(self.Cars_Date_Pick)
             self.base_actions.field_clear(self.Cars_Date_Pick)
             self.base_actions.field_send_keys(self.Cars_Date_Pick, pick_up_date)
-        if drop_off_date !="":
+        if drop_off_date != "":
             self.base_actions.click_on(self.Cars_Date_Drop)
             self.base_actions.field_clear(self.Cars_Date_Drop)
             self.base_actions.field_send_keys(self.Cars_Date_Drop, drop_off_date)
         self.base_actions.click_on(self.Cars_Search_Button)
 
-    def visa_actions(self):
-        pass
+    def search_visa(self, first_country="", second_country=""):
+        self.base_actions.click_on(self.Main_Button_Visa)
+        if first_country != "":
+            self.base_actions.click_on(self.Visa_Select_Country_First)
+            self.base_actions.field_send_keys(self.Visa_Select_Country_First, first_country)
+            self.base_actions.field_send_keys_enter(self.Visa_Select_Country_First)
+        if second_country != "":
+            self.base_actions.click_on(self.Visa_Select_Country_Second)
+            self.base_actions.field_send_keys(self.Visa_Select_Country_Second, second_country)
+            self.base_actions.field_send_keys_enter(self.Visa_Select_Country_Second)
+        self.base_actions.click_on(self.Visa_Search_Button)
