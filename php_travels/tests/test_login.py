@@ -2,7 +2,7 @@ import pytest
 from php_travels.pages.login_page import Login
 
 
-@pytest.mark.usefixtures('setup_ff')
+@pytest.mark.usefixtures('setup_ff', 'setup_ch')
 class TestPageFeature:
 
     # testujemy proces logowania z poprawnymi danymi + zapamiętanie danych
