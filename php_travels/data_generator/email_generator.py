@@ -1,4 +1,5 @@
 import name_generator, surname_generator
+import random
 
 def even_letters(before_even):
     """Funkcja do edycji napisu"""
@@ -12,15 +13,15 @@ def even_letters(before_even):
     return new_string_str
 
 
-def nickname_random():
+def nickname_generator():
     """Funkcja zwracająca nick"""
-    nickname = even_letters(name_generator()["Imie"]) + even_letters(surname_generator()["Nazwisko"])
-    nickname = {"Nick": nickname}
+    nickname = even_letters(name_generator()["name"]) + even_letters(surname_generator()["surname"])
+    nickname = {"nick": nickname}
     return nickname
 
 
-def email_random():
+def email_generator():
     """Funkcja zwracająca email"""
-    email = nickname_random()["Nick"] + "@wp.pl"
-    email = {"Email": email}
+    email = nickname_generator()["nick"] + str(random.randint(15, 10000000)) + "@wp.pl"
+    email = {"email": email}
     return email
