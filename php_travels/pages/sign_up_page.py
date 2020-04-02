@@ -1,5 +1,12 @@
-# class PageTwo:
-#
+import time
+from ..pages.locators import CommonSignInLocators as Locators
+
+class SignUpPage:
+
+    
+    def __init__(self, driver):
+        super(SignUpPage, self).__init__(driver)
+    #
 #     def __init__(self, driver):
 #         self.driver = driver
 #         self.element = "css selector for element"
