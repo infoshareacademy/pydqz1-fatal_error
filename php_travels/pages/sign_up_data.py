@@ -1,11 +1,14 @@
-from random import randint
+import random
+
+from data_generator.name_generator import name_generator
+from data_generator.surname_generator import surname_generator
+
 
 class SignUpData:
     def __init__(self):
-        email = 'ciacho' + str(randint(15, 10000000)) + '@wp.pl'
-        self.first_name_input = generate_name()
-        self.last_name_input
-        self.mobile_number_input
-        self.email_input
-        self.password_input
-        self.confirm_password_input
+        self.first_name_input = name_generator()
+        self.last_name_input = surname_generator()
+        self.mobile_number_input = random.randint(100000000, 999999999)
+        self.email_input = 'ciacho' + str(random.randint(15, 10000000)) + '@wp.pl'
+        self.password_input = 'Dobre/1haslo'
+        self.confirm_password_input = 'Dobre/1haslo'
