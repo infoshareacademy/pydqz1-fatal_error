@@ -3,9 +3,9 @@ import random
 
 
 def read_surnames():
-    with open("name_plus_surname_generators/surnames.json", "r") as surname_file:
+    with open("data_generator/surnames.json", "r", encoding="utf-8") as surname_file:
         json_file = surname_file.read()
-        surnames = json.loads(json_file)
+        surnames = json.loads(json_file, ensure_ascii=False)
         return surnames
 
 
