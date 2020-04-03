@@ -1,8 +1,6 @@
-import time
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+from tests.test_signup import TestSignUpPage
 from pages.locators import CommonSignInLocators as Locators
-class HomePage:
+class HomePage(TestSignUpPage):
 
     def __init__(self, driver):
         super(HomePage, self).__init__(driver)       #wywołanie konstruktora klasy bazowej

@@ -1,13 +1,13 @@
-import time
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-import allure
+from tests.test_signup import TestSignUpPage
 from pages.locators import CommonSignInLocators as Locators
-class AccountPage():
+class AccountPage(TestSignUpPage):
 
     def __init__(self, driver):
         super(AccountPage, self).__init__(driver)       #wywołanie konstruktora klasy bazowej
 
     def find_my_profile_text(self):
-        elements = self.driver.find_elements(*Locators.MY_PROFILE_TEXT)
+        return self.driver.find_elements(*Locators.MY_PROFILE_TEXT)
+
+    def account_page_actions(self):
+        elements = self.find_my_profile_text()
         return [elements[x].text for x in range(len(elements))]

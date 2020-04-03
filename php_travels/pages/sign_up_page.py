@@ -1,7 +1,8 @@
 from pages.sign_up_data import SignUpData
 from pages.locators import CommonSignInLocators as Locators
+from tests.test_signup import TestSignUpPage
 
-class SignUpPage():
+class SignUpPage(TestSignUpPage):
 
 
     def __init__(self,driver):
