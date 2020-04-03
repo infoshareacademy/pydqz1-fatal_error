@@ -1,4 +1,3 @@
-from selenium.webdriver.common.keys import Keys
 from random import choice
 import time
 from pages.base_actions import BaseActions
@@ -9,6 +8,7 @@ class SearchFeature:
     def __init__(self, driver):
         self.driver = driver
         self.base_actions = BaseActions(driver)
+        self.search_match = 'span.select2-match'
         self.tours_search_by = '#s2id_autogen10 a'
         self.tours_date = '#tchkin input'
         self.tours_guests = '#adults'
@@ -118,20 +118,19 @@ class SearchFeature:
         if town != "":
             self.base_actions.click_on(self.tours_search_by)
             self.base_actions.field_send_keys(self.tours_search_by, town)
-            time.sleep(0.5)
-            self.base_actions.field_send_keys_enter(self.tours_search_by)
+            self.base_actions.click_on(self.search_match)
         if date != "":
             self.base_actions.click_on(self.tours_date)
             self.base_actions.field_clear(self.tours_date)
             self.base_actions.field_send_keys(self.tours_date, date)
         if guests != "":
             self.base_actions.click_on(self.tours_guests)
-            time.sleep(0.5)
+            time.sleep(2)
             self.base_actions.click_on("#adults [value='" + guests + "']")
         if trip != "":
             self.base_actions.click_on(self.tours_select_type)
             self.base_actions.field_send_keys(self.tours_select_type, trip)
-            self.base_actions.field_send_keys_enter(self.tours_select_type)
+            self.base_actions.click_on(self.search_match)
         self.base_actions.click_on(self.tours_search_button)
 
     def search_cars(self, pick_up_town="", drop_off_town="", pick_up_date="", drop_off_date=""):
@@ -139,13 +138,12 @@ class SearchFeature:
         if pick_up_town != "":
             self.base_actions.click_on(self.Cars_Location_Pick)
             self.base_actions.field_send_keys(self.Cars_Location_Pick, pick_up_town)
-            time.sleep(0.5)
-            self.base_actions.field_send_keys_enter(self.Cars_Location_Pick)
-        if drop_off_town != "":
+            self.base_actions.click_on(self.search_match)
+        if drop_off_town != "" and pick_up_town != drop_off_town:
+            time.sleep(1)
             self.base_actions.click_on(self.Cars_Location_Drop)
             self.base_actions.field_send_keys(self.Cars_Location_Drop, drop_off_town)
-            time.sleep(0.5)
-            self.base_actions.field_send_keys_enter(self.Cars_Location_Drop)
+            self.base_actions.click_on(self.search_match)
         if pick_up_date != "":
             self.base_actions.click_on(self.Cars_Date_Pick)
             self.base_actions.field_clear(self.Cars_Date_Pick)
@@ -161,9 +159,9 @@ class SearchFeature:
         if first_country != "":
             self.base_actions.click_on(self.Visa_Select_Country_First)
             self.base_actions.field_send_keys(self.Visa_Select_Country_First, first_country)
-            self.base_actions.field_send_keys_enter(self.Visa_Select_Country_First)
+            self.base_actions.click_on(self.search_match)
         if second_country != "":
             self.base_actions.click_on(self.Visa_Select_Country_Second)
             self.base_actions.field_send_keys(self.Visa_Select_Country_Second, second_country)
-            self.base_actions.field_send_keys_enter(self.Visa_Select_Country_Second)
+            self.base_actions.click_on(self.search_match)
         self.base_actions.click_on(self.Visa_Search_Button)
