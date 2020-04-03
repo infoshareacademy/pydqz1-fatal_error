@@ -1,26 +1,40 @@
-import time
-from ..pages.locators import CommonSignInLocators as Locators
+from pages.sign_up_data import SignUpData
+from pages.locators import CommonSignInLocators as Locators
 
-class SignUpPage:
+class SignUpPage():
 
-    
-    def __init__(self, driver):
+
+    def __init__(self,driver):
         super(SignUpPage, self).__init__(driver)
-    #
-#     def __init__(self, driver):
-#         self.driver = driver
-#         self.element = "css selector for element"
-#         self.texts = "css selecotr for group of elements text"
-#         #następne css selektory
-#
-#     def action_on_page(self):
-#         self.driver.find_element_by_css_selector(self.element).click()
-#
-#     # nastepne metody dostepne na tej stronie
-#
-#     # metody mogą także obejmować pobranie i zapisanie w liście danych dostepnych na stronie:
-#
-#     def text_on_page(self):
-#         elements = self.driver.find_elements_by_css_selector(self.texts)
-#
- #       return [elements[x].text for x in range(len(elements))]  # czy ktoś jeszcze pamięta list comprehension? ;)
+
+    def find_name_input(self):
+            return self.driver.find_element(*Locators.NAME_INPUT)
+
+    def find_last_name_input(self):
+        return self.driver.find_element(*Locators.LAST_NAME_INPUT)
+
+    def find_mobile_number_input(self):
+        return self.driver.find_element(*Locators.PHONE_INPUT)
+
+    def find_email_input(self):
+        return self.driver.find_element(*Locators.EMAIL_INPUT)
+
+    def find_password_input(self):
+        return self.driver.find_element(*Locators.PASSWORD_INPUT)
+
+    def find_confirm_password_input(self):
+        return self.driver.find_element(*Locators.CONFIRM_PASSWORD_INPUT)
+
+    def find_sign_up_button(self):
+        return self.driver.find_element(*Locators.SIGN_UP_BUTTON)\
+
+    def sign_up_page_actions(self, driver):
+        sign_up = SignUpData()
+        self.find_name_input().send_keys(sign_up.first_name_input)
+        self.find_last_name_input().send_keys(sign_up.last_name_input)
+        self.find_mobile_number_input().send_keys(sign_up.mobile_number_input)
+        self.find_email_input().send_keys(sign_up.email_input)
+        self.find_password_input().send_keys(sign_up.password_input)
+        self.find_confirm_password_input().send_keys(sign_up.confirm_password_input)
+        driver.implicitly_wait(3)
+        self.find_sign_up_button().click()

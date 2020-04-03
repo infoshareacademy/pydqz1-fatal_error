@@ -1,4 +1,5 @@
-import name_generator, surname_generator
+from data_generator.name_generator import name_generator
+from data_generator.surname_generator import surname_generator
 import random
 
 def even_letters(before_even):
@@ -12,16 +13,14 @@ def even_letters(before_even):
     new_string_str = "".join(new_string_list)
     return new_string_str
 
-
 def nickname_generator():
     """Funkcja zwracająca nick"""
     nickname = even_letters(name_generator()["name"]) + even_letters(surname_generator()["surname"])
     nickname = {"nick": nickname}
     return nickname
 
-
 def email_generator():
     """Funkcja zwracająca email"""
-    email = nickname_generator()["nick"] + str(random.randint(15, 10000000)) + "@wp.pl"
+    email = nickname_generator()["nick"] + str(random.randint(15, 1000)) + "@wp.pl"
     email = {"email": email}
     return email

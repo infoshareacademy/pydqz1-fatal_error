@@ -13,7 +13,7 @@ class TestSignUpPage:
 # pojedyńczy test odnośnie danej funkcjonalności np. czy jak wpiszę w wyszukiwarkę tekst to mi wyskoczy dobry wynik?
     def test_numerouno(self):
         home_page = HomePage(self.driver)  # -> stworzenie page objectu z przypisaniem mu webdrivera
-        home_page.action_on_page()  # -> wywołanie zamierzonej akcji na stronie
+        home_page.home_page_actions()  # -> wywołanie zamierzonej akcji na stronie
 
         time.sleep(2)
         list_of_assert_elements = home_page.text_left_menu()
@@ -23,5 +23,5 @@ class TestSignUpPage:
 
     def test_same_email(self):
         home_page = HomePage(self.driver)
-        home_page.action_on_page(firstname='Kazik', lastname='Ciacho', phone='phone',  )
+        home_page.home_page_actions(firstname='name', lastname='surname', phone='phone',  )
 

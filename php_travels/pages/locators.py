@@ -5,7 +5,7 @@ class CommonSignInLocators:
     MY_ACCOUNT_MENU = (By.CSS_SELECTOR, "ul .nav #li_myaccount")
     SIGN_UP_LINK = (By.CSS_SELECTOR, ".open >ul>:nth-child(2) > a")
     NAME_INPUT = (By.CSS_SELECTOR, "[name='firstname']")
-    LASTNAME_INPUT = (By.CSS_SELECTOR, "[name='lastname']")
+    LAST_NAME_INPUT = (By.CSS_SELECTOR, "[name='lastname']")
     PHONE_INPUT = (By.CSS_SELECTOR, "[name='phone']")
     EMAIL_INPUT = (By.CSS_SELECTOR, "[name='email']")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "[name='password']")

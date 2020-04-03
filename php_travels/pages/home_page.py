@@ -1,28 +1,22 @@
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from ..pages.locators import CommonSignInLocators as Locators
+from pages.locators import CommonSignInLocators as Locators
 class HomePage:
 
     def __init__(self, driver):
         super(HomePage, self).__init__(driver)       #wywołanie konstruktora klasy bazowej
-        # self.my_account_menu_css = "ul .nav #li_myaccount"
-        # self.sign_up_link_css = ".open >ul>:nth-child(2) > a"
-        # self.name_input = "[name='firstname']"
-        # self.lastname_input = "[name='lastname']"
-        # self.phone_input = "[name='phone']"
-        # self.email_input = "[name='email']"
-        # self.password_input = "[name='password']"
-        # self.confirmpassword_input = "[name='confirmpassword']"
-        # self.signup_button = "button.signupbtn.btn_full.btn.btn-action.btn-block.btn-lg"
-        # self.my_profile_text = "div#body-section li:nth-child(2) > a"
-        # #następne css selektory
 
-    def unfold_my_account_menu(self):
+    def find_my_account_menu(self):
         return self.driver.find_element(*Locators.MY_ACCOUNT_MENU)
 
-    def choose__to_sign_in(self):
+    def find_sign_up_link(self):
         return self.driver.find_element(*Locators.SIGN_UP_LINK)
+
+    def home_page_actions(self,driver):
+        self.find_my_account_menu().click()
+        driver.implicitly_wait(2)
+        self.find_sign_up_link().click()
 
         # self.driver.find_element_by_css_selector(self.my_account_menu_css).click()
         # self.driver.find_element_by_css_selector(self.sign_up_link_css).click()
@@ -37,10 +31,4 @@ class HomePage:
         # time.sleep(2)
 
 
-    # nastepne metody dostepne na tej stronie
 
-    # metody mogą także obejmować pobranie i zapisanie w liście danych dostepnych na stronie:
-
-    def text_left_menu(self):
-        elements = self.driver.find_elements_by_css_selector(self.my_profile_text)
-        return [elements[x].text for x in range(len(elements))]
