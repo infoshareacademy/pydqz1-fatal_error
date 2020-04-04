@@ -6,13 +6,14 @@ import allure
 import time
 from allure_commons.types import AttachmentType
 from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 @pytest.fixture()
 def setup_ch(request):
     # te akcje zostsaną wykonane przed testem:
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    driver.get('http://www.kurs-selenium.pl/demo/')
+    driver.get('http://www.kurs-selenium.pl/demo/login')
     driver.implicitly_wait(10)
     driver.maximize_window()
     wait = WebDriverWait(driver, 15, 1)
@@ -30,11 +31,11 @@ def setup_ch(request):
     time.sleep(2)
     driver.quit()
 
-
+# poprawic execute path do ff
 @pytest.fixture()
 def setup_ff(request):
-    driver = webdriver.Firefox()
-    driver.get('http://www.kurs-selenium.pl/demo/')
+    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    driver.get('http://www.kurs-selenium.pl/demo/login')
     driver.implicitly_wait(10)
     driver.maximize_window()
     wait = WebDriverWait(driver, 15, 1)
