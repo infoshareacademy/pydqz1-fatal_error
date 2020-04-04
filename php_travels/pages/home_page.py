@@ -1,4 +1,4 @@
-
+import time
 from selenium.webdriver.common.by import By
 from pages.base_actions import BaseActions
 
@@ -11,9 +11,9 @@ class HomePage:
         self.login_link = (By.CSS_SELECTOR, ".open >ul>:nth-child(1) > a")
         self.sign_up_link = (By.CSS_SELECTOR, ".open >ul>:nth-child(2) > a")
 
-    def choose_home_page_action(self, driver, button_name="login"):
+    def choose_home_page_action(self, button_name="login"):
         self.base_actions.click_on(self.my_account_menu)               # self.driver.find_element_by_css_selector(self.my_account_menu).click()
-        driver.implicitly_wait(2)
+        time.sleep(2)
         if button_name == "login":
             self.base_actions.click_on(self.login_link)                #self.driver.find_element_by_css_selector(self.login_link).click()
         else:

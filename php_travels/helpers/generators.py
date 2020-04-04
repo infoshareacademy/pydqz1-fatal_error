@@ -5,7 +5,7 @@ result = []
 
 def read_names():
     """Funkcja odczytująca/dekodująca imiona z pliku"""
-    with open("names.json", "r", encoding="utf-8") as name_file:
+    with open("/home/ania/Desktop/Kurs/Project/pydqz1-fatal_error/php_travels/helpers/names.json", "r", encoding="utf-8") as name_file:
         json_file = name_file.read()
         names = json.loads(json_file)  #ensure_ascii=False
         return names
@@ -18,7 +18,7 @@ def name_generator():
 
 def read_surnames():
     """Funkcja odczytująca/dekodująca nazwiska z pliku"""
-    with open("surnames.json", "r", encoding="utf-8") as surname_file:
+    with open("/home/ania/Desktop/Kurs/Project/pydqz1-fatal_error/php_travels/helpers/surnames.json", "r", encoding="utf-8") as surname_file:
         json_file = surname_file.read()
         surnames = json.loads(json_file)  #ensure_ascii=False
         return surnames
@@ -28,6 +28,11 @@ def surname_generator():
     surnames = read_surnames()
     surname = random.choice(surnames)
     return surname
+
+def phone_number_generator():
+    """Funkcja zwracająca dziewięcio cyfrowy numer"""
+    phone_number = random.randint(100000000, 999999999)
+    return phone_number
 
 def even_letters(before_even):
     """Funkcja do edycji napisu"""

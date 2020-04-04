@@ -9,5 +9,5 @@ class AccountPage:
         self.base_actions = BaseActions(driver)
         self.welcome_message = (By.CSS_SELECTOR, "h3.RTL")
 
-    def account_page_actions(self):
+    def account_page_action(self):
         self.base_actions.assert_text_elements(self.welcome_message)

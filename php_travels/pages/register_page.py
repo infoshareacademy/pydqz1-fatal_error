@@ -8,6 +8,7 @@ class RegisterPage:
     def __init__(self, driver):
         self.driver = driver
         self.base_actions = BaseActions(driver)
+        self.sign_up_panel_heading = (By.CSS_SELECTOR, ".go-text-right.panel-heading")
         self.name_input = (By.CSS_SELECTOR, "[name='firstname']")
         self.last_name_input = (By.CSS_SELECTOR, "[name='lastname']")
         self.phone_input = (By.CSS_SELECTOR, "[name='phone']")
@@ -16,7 +17,10 @@ class RegisterPage:
         self.confirm_password_input = (By.CSS_SELECTOR, "[name='confirmpassword']")
         self.sign_up_button = (By.CSS_SELECTOR, "button.signupbtn.btn_full.btn.btn-action.btn-block.btn-lg")
 
-    def sign_up_page_actions(self, driver, name, surname, number, email, password, password2):
+    def register_page_header(self):
+        self.base_actions.assert_text_elements(self.sign_up_panel_heading)
+
+    def register_page_actions(self, driver, name, surname, number, email, password, password2):
         if name != "":
             self.base_actions.field_send_keys(self.name_input, name)                     #self.driver.find_element_by_css_selector(self.name_input).send_keys(name)
         if surname != "":
