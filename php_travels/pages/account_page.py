@@ -1,13 +1,13 @@
-from tests.test_signup import TestSignUpPage
-from pages.locators import CommonSignInLocators as Locators
-class AccountPage(TestSignUpPage):
+
+from selenium.webdriver.common.by import By
+from pages.base_actions import BaseActions
+
+class AccountPage:
 
     def __init__(self, driver):
-        super(AccountPage, self).__init__(driver)       #wywołanie konstruktora klasy bazowej
-
-    def find_my_profile_text(self):
-        return self.driver.find_elements(*Locators.MY_PROFILE_TEXT)
+        self.driver = driver
+        self.base_actions = BaseActions(driver)
+        self.welcome_message = (By.CSS_SELECTOR, "h3.RTL")
 
     def account_page_actions(self):
-        elements = self.find_my_profile_text()
-        return [elements[x].text for x in range(len(elements))]
+        self.base_actions.assert_text_elements(self.welcome_message)

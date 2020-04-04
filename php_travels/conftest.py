@@ -7,6 +7,7 @@ from allure_commons.types import AttachmentType
 from pages.home_page import HomePage
 from pages.register_page import RegisterPage
 from pages.account_page import AccountPage
+from pages.base_actions import BaseActions
 
 @pytest.fixture()
 def setup(request):
@@ -15,6 +16,7 @@ def setup(request):
     driver.maximize_window()
     request.cls.driver = driver
     request.cls.home_page = HomePage(driver)
+    request.cls.base_actions = BaseActions(driver)
     before_failed = request.session.testsfailed
     yield
     if request.session.testsfailed != before_failed:
@@ -30,6 +32,7 @@ def setup1(request):
     request.cls.driver = driver
     request.cls.register_page = RegisterPage(driver)
     request.cls.account_page = AccountPage(driver)
+    request.cls.base_actions = BaseActions(driver)
     before_failed = request.session.testsfailed
     yield
     if request.session.testsfailed != before_failed:

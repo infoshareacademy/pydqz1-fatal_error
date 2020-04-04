@@ -1,41 +1,33 @@
-from pages.sign_up_data import SignUpData
-from pages.locators import CommonSignInLocators as Locators
-from tests.test_signup import TestSignUpPage
 
-class RegisterPage(TestSignUpPage):
+from selenium.webdriver.common.by import By
+from pages.base_actions import BaseActions
+
+class RegisterPage:
 
 
-    def __init__(self,driver):
-        super(RegisterPage, self).__init__(driver)
+    def __init__(self, driver):
+        self.driver = driver
+        self.base_actions = BaseActions(driver)
+        self.name_input = (By.CSS_SELECTOR, "[name='firstname']")
+        self.last_name_input = (By.CSS_SELECTOR, "[name='lastname']")
+        self.phone_input = (By.CSS_SELECTOR, "[name='phone']")
+        self.email_input = (By.CSS_SELECTOR, "[name='email']")
+        self.password_input = (By.CSS_SELECTOR, "[name='password']")
+        self.confirm_password_input = (By.CSS_SELECTOR, "[name='confirmpassword']")
+        self.sign_up_button = (By.CSS_SELECTOR, "button.signupbtn.btn_full.btn.btn-action.btn-block.btn-lg")
 
-    def find_name_input(self):
-            return self.driver.find_element(*Locators.NAME_INPUT)
-
-    def find_last_name_input(self):
-        return self.driver.find_element(*Locators.LAST_NAME_INPUT)
-
-    def find_mobile_number_input(self):
-        return self.driver.find_element(*Locators.PHONE_INPUT)
-
-    def find_email_input(self):
-        return self.driver.find_element(*Locators.EMAIL_INPUT)
-
-    def find_password_input(self):
-        return self.driver.find_element(*Locators.PASSWORD_INPUT)
-
-    def find_confirm_password_input(self):
-        return self.driver.find_element(*Locators.CONFIRM_PASSWORD_INPUT)
-
-    def find_sign_up_button(self):
-        return self.driver.find_element(*Locators.SIGN_UP_BUTTON)\
-
-    def sign_up_page_actions(self, driver):
-        sign_up = SignUpData()
-        self.find_name_input().send_keys(sign_up.first_name_input)
-        self.find_last_name_input().send_keys(sign_up.last_name_input)
-        self.find_mobile_number_input().send_keys(sign_up.mobile_number_input)
-        self.find_email_input().send_keys(sign_up.email_input)
-        self.find_password_input().send_keys(sign_up.password_input)
-        self.find_confirm_password_input().send_keys(sign_up.confirm_password_input)
+    def sign_up_page_actions(self, driver, name, surname, number, email, password, password2):
+        if name != "":
+            self.base_actions.field_send_keys(self.name_input, name)                     #self.driver.find_element_by_css_selector(self.name_input).send_keys(name)
+        if surname != "":
+            self.base_actions.field_send_keys(self.last_name_input, surname)             #self.driver.find_element_by_css_selector(self.last_name_input).send_keys(surname)
+        if number != "":
+            self.base_actions.field_send_keys(self.phone_input, number)                  #self.driver.find_element_by_css_selector(self.phone_input).send_keys(number)
+        if email != "":
+            self.base_actions.field_send_keys(self.email_input, email)                   #self.driver.find_element_by_css_selector(self.email_input).send_keys(email)
+        if password != "":
+            self.base_actions.field_send_keys(self.password_input, password)             #self.driver.find_element_by_css_selector(self.password_input).send_keys(password)
+        if password2 != "":
+            self.base_actions.field_send_keys(self.confirm_password_input, password2)    #self.driver.find_element_by_css_selector(self.confirm_password_input).send_keys(password2)
         driver.implicitly_wait(3)
-        self.find_sign_up_button().click()
+        self.base_actions.click_on(self.sign_up_button)                                  #self.driver.find_element_by_css_selector(self.sign_up_button).click()

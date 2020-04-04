@@ -1,26 +1,23 @@
 import pytest
-from selenium.webdriver.support.ui import Select
 from assertpy import assert_that
 from pages.home_page import HomePage
-from pages.register_page import SignUpPage
+from pages.register_page import RegisterPage
 from pages.account_page import AccountPage
+from helpers import generators
 import time
 import allure
 
-@allure.description('Testing Sign up feature')
-# klasa z testami dotyczącymi jednej funkcjonalności:
+
+
+@allure.description('Testing Register feature')
 @pytest.mark.usefixtures('setup')
-class TestSignUpPage:
+# klasa z testami dotyczącymi jednej funkcjonalności
+class TestRegister:
 
 # pojedyńczy test odnośnie danej funkcjonalności np. czy jak wpiszę w wyszukiwarkę tekst to mi wyskoczy dobry wynik?
-    def sign_up_setup(self):
-        self.driver.get('http://www.kurs-selenium.pl/demo/')
-        home_page = HomePage(self.driver)                  # -> stworzenie page objectu z przypisaniem mu webdrivera
-        home_page.home_page_actions()                      # -> wywołanie zamierzonej akcji na stronie
-        sign_up_page = SignUpPage(self.driver)
-        sign_up_page.sign_up_page_actions()
-        account_page = AccountPage(self.driver)
-        account_page.account_page_actions()
+    @allure.step('Test register with valid data')
+    def test_register_valid_data(self, name=name_generator(), surname="", number, email, password):
+        self.home_page.
 
 
 
