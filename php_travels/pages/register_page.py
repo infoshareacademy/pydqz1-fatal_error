@@ -2,11 +2,11 @@ from pages.sign_up_data import SignUpData
 from pages.locators import CommonSignInLocators as Locators
 from tests.test_signup import TestSignUpPage
 
-class SignUpPage(TestSignUpPage):
+class RegisterPage(TestSignUpPage):
 
 
     def __init__(self,driver):
-        super(SignUpPage, self).__init__(driver)
+        super(RegisterPage, self).__init__(driver)
 
     def find_name_input(self):
             return self.driver.find_element(*Locators.NAME_INPUT)

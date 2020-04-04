@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.support.ui import Select
 from assertpy import assert_that
 from pages.home_page import HomePage
-from pages.sign_up_page import SignUpPage
+from pages.register_page import SignUpPage
 from pages.account_page import AccountPage
 import time
 import allure

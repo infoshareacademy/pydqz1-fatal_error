@@ -1,9 +1,9 @@
 import random
 
-from data_generator.name_generator import name_generator
-from data_generator.password_generator import password_generator
-from data_generator.surname_generator import surname_generator
-from data_generator.email_generator import email_generator
+from helpers.name_generator import name_generator
+from helpers.password_generator import password_generator
+from helpers.surname_generator import surname_generator
+from helpers.email_generator import email_generator
 
 
 class SignUpData:
