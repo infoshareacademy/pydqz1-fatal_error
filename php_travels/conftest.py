@@ -3,10 +3,10 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from pages.page_one import SearchFeature
-from pages.base_actions import BaseActions
 import time
 import allure
 from allure_commons.types import AttachmentType
+
 
 @pytest.fixture()
 def setup_ch(request):
@@ -24,6 +24,7 @@ def setup_ch(request):
         allure.attach(driver.get_screenshot_as_png(), name='Test failed', attachment_type=AttachmentType.PNG)
     time.sleep(2)
     driver.quit()
+
 
 # @pytest.fixture()
 # def setup_ff(request):

@@ -165,3 +165,4 @@ class SearchFeature:
             self.base_actions.field_send_keys(self.Visa_Select_Country_Second, second_country)
             self.base_actions.click_on(self.search_match)
         self.base_actions.click_on(self.Visa_Search_Button)
+
