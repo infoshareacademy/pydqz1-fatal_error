@@ -1,0 +1,1 @@
+[{"Imie": "Jakub", "Nazwisko": "Solarczyk", "Nick": "JkbSlrzk", "Email": "JkbSlrzk@wp.pl", "Adres": "Miasto: Tychy Ulica: P\u0142ocka Numer: 433"}]
