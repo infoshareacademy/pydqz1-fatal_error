@@ -1,11 +1,11 @@
 import json
-# result to rzeczy ktore mają być zapisane
+
 result = []
 
 
 def save_result():
-    with open('result.json', 'w') as result_file:
-        json.dump(result, result_file)
+    with open('result.json', 'w', encoding="utf-8") as result_file:
+        json.dump([result], result_file, ensure_ascii=False)
 
 
 
