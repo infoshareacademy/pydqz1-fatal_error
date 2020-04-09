@@ -80,5 +80,5 @@ def create_person(save_to_file=False):
 # Zapis danych do pliku w formacie .json
 def save_result(result):
     """Funkcja do zapisu rezultatu"""
-    with open('result.json', 'w', encoding="utf-8") as result_file:
+    with open('Data-Generator/result.json', 'w', encoding="utf-8") as result_file:
         json.dump([result], result_file, ensure_ascii=False)
