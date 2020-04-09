@@ -3,7 +3,7 @@ import random
 
 
 def read_surnames():
-    with open("name_plus_surname_generators/surnames.json", "r") as surname_file:
+    with open("Data-Generator/name_plus_surname_generators/surnames.json", "r") as surname_file:
         json_file = surname_file.read()
         surnames = json.loads(json_file)
         return surnames

@@ -4,7 +4,7 @@ from random import randint
 
 
 def open_file_1():
-    file_1 = open("generator_adresu/cities_list")
+    file_1 = open("Data-Generator/generator_adresu/cities_list")
     open_file_1 = file_1.read()
     for i in open_file_1:
         if ',' in i:
@@ -14,7 +14,7 @@ def open_file_1():
     return cities
 
 def open_file_2():
-    file_2 = open('generator_adresu/streets_list')
+    file_2 = open('Data-Generator/generator_adresu/streets_list')
     open_file_2 = file_2.read()
     for i in open_file_2:
         if ',' in i:
@@ -22,6 +22,7 @@ def open_file_2():
     streets = streets.split()
 
     return streets
+
 
 def complete_address(cities,streets):
     numbers = []
@@ -35,9 +36,8 @@ def complete_address(cities,streets):
     full_address = {'Adres' : city,
                     'Street' : street,
                     'Number' : numbers[0]}
+    return full_address
 
-
-    return  full_address
 
 def print_address():
     get_city = open_file_1()
