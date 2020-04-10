@@ -5,7 +5,7 @@ result = []
 
 def read_names():
     """Funkcja odczytująca/dekodująca imiona z pliku"""
-    with open("/home/ania/Desktop/Kurs/Project/pydqz1-fatal_error/php_travels/helpers/names.json", "r", encoding="utf-8") as name_file:
+    with open("names.json", "r", encoding="utf-8") as name_file:
         json_file = name_file.read()
         names = json.loads(json_file)  #ensure_ascii=False
         return names
@@ -18,7 +18,7 @@ def name_generator():
 
 def read_surnames():
     """Funkcja odczytująca/dekodująca nazwiska z pliku"""
-    with open("/home/ania/Desktop/Kurs/Project/pydqz1-fatal_error/php_travels/helpers/surnames.json", "r", encoding="utf-8") as surname_file:
+    with open("surnames.json", "r", encoding="utf-8") as surname_file:
         json_file = surname_file.read()
         surnames = json.loads(json_file)  #ensure_ascii=False
         return surnames
